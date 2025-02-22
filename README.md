@@ -2,7 +2,7 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/princeajuzie7/moxa-ui)](https://github.com/princeajuzie7/moxa-ui)
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/princeajuzie7/moxa-ui/blob/main/LICENSE.md)
-[![Build Status](https://img.shields.io/badge/status-coming%20soon-orange?style=for-the-badge&labelColor=black)](https://moxaui.com)
+[![Build Status](https://img.shields.io/badge/status-coming)](https://moxaui.com)
 
 Moxa UI is an open-source UI component library for React Native, inspired by [shadcn/ui](https://ui.shadcn.com). It provides reusable, customizable components built with [NativeWind](https://nativewind.dev).
 
