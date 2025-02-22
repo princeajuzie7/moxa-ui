@@ -9,6 +9,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "@types/react": "^19.0.10",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "prettier": "^3.2.5",
@@ -20,6 +21,7 @@
     "node": ">=20"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.6",
     "tailwindcss-animate": "^1.0.7"
   }
 }

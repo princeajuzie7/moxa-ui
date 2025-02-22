@@ -1,101 +1,239 @@
-import Image from "next/image";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+"use client";
+
+import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
+import { Button } from "@workspace/ui/components/button";
+
+import { Input } from "@workspace/ui/components/input";
+import {
+  ArrowUpRight,
+  Github,
+  Command,
+  Sparkles,
+  Zap,
+  Menu,
+} from "lucide-react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@workspace/ui/components/sheet";
+import { ThemeToggle } from "@/components/theme/theme-toggle"
+const MOXA_TEXT = "MOXA"
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [email, setEmail] = useState("")
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+  const ref = useRef<HTMLDivElement>(null)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const springConfig = { damping: 30, stiffness: 200 }
+  const springX = useSpring(mouseX, springConfig)
+  const springY = useSpring(mouseY, springConfig)
+
+
+
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 md:p-6 backdrop-blur-sm bg-background/50">
+        <Link href="/" className="text-xl font-medium relative group">
+          <span className="relative z-10">moxa</span>
+          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+        </Link>
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center space-x-8">
+          {["Documentation", "Components", "Examples", ""].map((item, i) => (
+            <Link
+              key={i}
+              href="#"
+              className="relative group text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <span className="relative z-10 flex items-center gap-1">
+                {item} {item === "" && <Github className="w-4 h-4" />}
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-foreground/5 to-transparent opacity-0 group-hover:opacity-100 blur-lg transition-opacity" />
+            </Link>
+          ))}
+          <ThemeToggle />
+
         </div>
+
+        {/* Mobile Navigation */}
+        <div className="flex items-center gap-4 md:hidden">
+          <ThemeToggle />
+          <Sheet>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon">
+                <Menu className="h-6 w-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] bg-black/95 backdrop-blur-xl border-neutral-800">
+              <nav className="flex flex-col space-y-6 mt-8">
+                {["Documentation", "Components", "Examples", "GitHub"].map((item, i) => (
+                  <Link
+                    key={i}
+                    href="#"
+                    className="text-lg text-neutral-400 hover:text-white transition-colors flex items-center gap-2"
+                  >
+                    {item} {item === "GitHub" && <Github className="w-5 h-5" />}
+                  </Link>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <main className="relative min-h-screen flex flex-col items-center justify-center px-4" ref={ref}>
+        <motion.div
+          className="absolute inset-0 pointer-events-none opacity-50 md:opacity-100"
+          style={{
+            background: "radial-gradient(600px at 0 0, rgba(236, 72, 153, 0.15), transparent)",
+            transform: "translate3d(0, 0, 0)",
+            x: springX,
+            y: springY,
+          }}
+        />
+
+        <div className="relative mt-5 text-center z-10 max-w-6xl mx-auto">
+          {/* Open Source Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 text-sm"
+          >
+            <span className="w-2 h-2 rounded-full bg-green-500" />
+            Open Source UI Components for React Native
+          </motion.div>
+
+          {/* Main Content Section */}
+          <div className="mt-8 space-y-8 md:space-y-12">
+            {/* Animated MOXA text */}
+            <div className="relative mx-auto perspective">
+              <div className="flex items-center justify-center">
+                {MOXA_TEXT.split("").map((letter, index) => (
+                  <motion.div key={index} className="relative">
+                    <span className="text-[20vw] md:text-[15vw] lg:text-[190px] font-bold tracking-tighter leading-none text-white relative z-10 block">
+                      {letter}
+                    </span>
+                  
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Description and Waitlist */}
+            <motion.div
+              className="space-y-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <h2 className="text-xl md:text-2xl font-light tracking-wide max-w-2xl mx-auto px-4">
+                Beautiful, fast and modern React Native components. Built with performance and customization in mind.
+              </h2>
+
+              {/* Feature Cards */}
+              <div className="flex flex-col md:flex-row gap-3 md:gap-6 px-4 justify-center">
+                <motion.div
+                  className="group relative"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-fuchsia-500/10 to-pink-500/10 rounded-xl blur-xl group-hover:blur-2xl transition-all" />
+                  <div className="relative bg-neutral-900/50 backdrop-blur-sm px-6 py-3 rounded-xl border border-white/5 flex items-center gap-2">
+                    <Command className="w-4 h-4 text-fuchsia-500" />
+                    <span className="text-sm">Type Safe</span>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  className="group relative"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-indigo-500/10 rounded-xl blur-xl group-hover:blur-2xl transition-all" />
+                  <div className="relative bg-neutral-900/50 backdrop-blur-sm px-6 py-3 rounded-xl border border-white/5 flex items-center gap-2">
+                    <Zap className="w-4 h-4 text-blue-500" />
+                    <span className="text-sm">Native Performance</span>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  className="group relative"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-teal-500/10 to-cyan-500/10 rounded-xl blur-xl group-hover:blur-2xl transition-all" />
+                  <div className="relative bg-neutral-900/50 backdrop-blur-sm px-6 py-3 rounded-xl border border-white/5 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-teal-500" />
+                    <span className="text-sm">Customizable</span>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Waitlist Form */}
+              <div className="max-w-md mx-auto px-4 mt-12">
+                <div className="flex gap-2 p-1 rounded-lg bg-neutral-900/50 backdrop-blur-sm border border-neutral-800">
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="bg-transparent border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-white placeholder:text-neutral-500"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <Button className="bg-white text-black hover:bg-white/90 px-6">Join Waitlist</Button>
+                </div>
+              </div>
+
+              {/* Documentation Links */}
+              <div className="flex items-center justify-center gap-4 md:gap-6 flex-wrap mt-8">
+                <Button
+                  variant="link"
+                  className="text-white hover:text-white/90 text-base h-auto p-0 hover:no-underline group relative"
+                >
+                  <span className="relative z-10 px-4 md:px-6 py-2">
+                    Documentation
+                    <span className="absolute inset-x-0 -bottom-1 h-px bg-gradient-to-r from-violet-500 to-fuchsia-500 scale-x-0 group-hover:scale-x-100 transition-transform" />
+                  </span>
+                  <div className="absolute inset-0 bg-white/5 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform" />
+                </Button>
+                <Button
+                  variant="link"
+                  className="text-white hover:text-white/90 text-base h-auto p-0 hover:no-underline flex items-center gap-2 group relative"
+                >
+                  <span className="relative z-10 px-4 md:px-6 py-2">
+                    Get Started
+                    <span className="absolute inset-x-0 -bottom-1 h-px bg-gradient-to-r from-cyan-500 to-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform" />
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <div className="absolute inset-0 bg-white/5 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform" />
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Code Preview Hint */}
+        <motion.div
+          className="fixed bottom-6 right-6 px-6 py-3 rounded-xl bg-neutral-900/50 backdrop-blur-sm text-sm text-neutral-400 flex items-center gap-3 border border-white/5 hidden md:flex"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+        >
+          <span className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 animate-pulse" />
+          <span>React Native Components</span>
+        </motion.div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
-  );
+  )
 }
+
