@@ -1,6 +1,6 @@
 # MOXA UI
 
-[![GitHub Stars](https://img.shields.io/github/stars/moxaui/moxaui?style=for-the-badge&color=gold&labelColor=black)](https://github.com/princeajuzie7/mox-aui)
+[![GitHub Stars](https://img.shields.io/github/stars/princeajuzie7/moxa-ui?style=for-the-badge&color=gold&labelColor=black)](https://github.com/princeajuzie7/moxa-ui)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge&color=blue&labelColor=black)](https://github.com/princeajuzie7/moxa-ui/blob/main/LICENSE.md)
 [![Build Status](https://img.shields.io/badge/status-coming%20soon-orange?style=for-the-badge&labelColor=black)](https://moxaui.com)
 
