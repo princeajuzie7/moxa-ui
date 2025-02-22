@@ -1,8 +1,8 @@
 # MOXA UI
 
-[![GitHub Stars](https://img.shields.io/github/stars/moxaui/moxaui?style=for-the-badge&color=gold&labelColor=black)](https://github.com/princeajuzie7/moxaui)
-[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge&color=blue&labelColor=black)](https://github.com/moxaui/princeajuzie7/blob/main/LICENSE.md)
-[![Build Status](https://img.shields.io/badge/status-coming%20soon-orange?style=for-the-badge&labelColor=black)](https://moxaui.dev)
+[![GitHub Stars](https://img.shields.io/github/stars/moxaui/moxaui?style=for-the-badge&color=gold&labelColor=black)](https://github.com/princeajuzie7/mox-aui)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge&color=blue&labelColor=black)](https://github.com/princeajuzie7/moxa-ui/blob/main/LICENSE.md)
+[![Build Status](https://img.shields.io/badge/status-coming%20soon-orange?style=for-the-badge&labelColor=black)](https://moxaui.com)
 
 Moxa UI is an open-source UI component library for React Native, inspired by [shadcn/ui](https://ui.shadcn.com). It provides reusable, customizable components built with [NativeWind](https://nativewind.dev).
 
@@ -17,7 +17,7 @@ Moxa UI is an open-source UI component library for React Native, inspired by [sh
 
 ## 📖 Documentation (Coming Soon)
 
-- [Website](https://moxaui.dev)
+- [Website](https://moxaui..com)
 - [Examples](https://github.com/moxaui/examples)
 - [Discord Community](https://discord.gg/moxaui)
 
@@ -26,7 +26,7 @@ Moxa UI is an open-source UI component library for React Native, inspired by [sh
 ### 1. Create a new React Native project:
 
 ```bash
-npx create-react-native-app@latest my-app -t @moxaui/template
+npx create-expo-app@latest my-app -t @moxaui/template
 cd my-app
 ```
 
@@ -138,5 +138,5 @@ Want to help? You can:
 
 ## 📝 License
 
-Moxa UI is licensed under the [MIT License](https://github.com/moxaui/moxaui/blob/main/LICENSE.md).
+Moxa UI is licensed under the [MIT License](https://github.com/princeajuzie7/moxa-ui/blob/main/LICENSE.md).
 
