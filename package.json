@@ -1,5 +1,5 @@
 {
-  "name": "shadcn-ui-monorepo",
+  "name": "moxa-ui-monorepo",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "@types/react": "^19.0.10",
+    "@types/react": "18.3.1",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "prettier": "^3.2.5",
@@ -21,7 +21,15 @@
     "node": ">=20"
   },
   "dependencies": {
+    "@babel/runtime": "^7.26.9",
     "@radix-ui/react-dialog": "^1.1.6",
+    "@react-navigation/elements": "^2.2.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "tailwindcss-animate": "^1.0.7"
+  },
+  "resolutions": {
+    "@types/react": "18.3.1",
+    "@types/react-dom": "18.3.1"
   }
 }
