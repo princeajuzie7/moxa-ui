@@ -4,7 +4,7 @@
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@workspace/ui/components/button";
-
+import { HeroText } from "@/components/hero";
 import { Input } from "@workspace/ui/components/input";
 import {
   ArrowUpRight,
@@ -59,7 +59,6 @@ export default function Home() {
             </Link>
           ))}
           <ThemeToggle />
-
         </div>
 
         {/* Mobile Navigation */}
@@ -71,17 +70,23 @@ export default function Home() {
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] bg-black/95 backdrop-blur-xl border-neutral-800">
+            <SheetContent
+              side="right"
+              className="w-[300px] bg-black/95 backdrop-blur-xl border-neutral-800"
+            >
               <nav className="flex flex-col space-y-6 mt-8">
-                {["Documentation", "Components", "Examples", "GitHub"].map((item, i) => (
-                  <Link
-                    key={i}
-                    href="#"
-                    className="text-lg text-neutral-400 hover:text-white transition-colors flex items-center gap-2"
-                  >
-                    {item} {item === "GitHub" && <Github className="w-5 h-5" />}
-                  </Link>
-                ))}
+                {["Documentation", "Components", "Examples", "GitHub"].map(
+                  (item, i) => (
+                    <Link
+                      key={i}
+                      href="#"
+                      className="text-lg text-neutral-400 hover:text-white transition-colors flex items-center gap-2"
+                    >
+                      {item}{" "}
+                      {item === "GitHub" && <Github className="w-5 h-5" />}
+                    </Link>
+                  )
+                )}
               </nav>
             </SheetContent>
           </Sheet>
@@ -89,11 +94,15 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <main className="relative min-h-screen flex flex-col items-center justify-center px-4" ref={ref}>
+      <main
+        className="relative min-h-screen flex flex-col items-center justify-center px-4"
+        ref={ref}
+      >
         <motion.div
           className="absolute inset-0 pointer-events-none opacity-50 md:opacity-100"
           style={{
-            background: "radial-gradient(600px at 0 0, rgba(236, 72, 153, 0.15), transparent)",
+            background:
+              "radial-gradient(600px at 0 0, rgba(236, 72, 153, 0.15), transparent)",
             transform: "translate3d(0, 0, 0)",
             x: springX,
             y: springY,
@@ -121,10 +130,10 @@ export default function Home() {
                     <span className="text-[20vw] md:text-[15vw] lg:text-[190px] font-bold tracking-tighter leading-none text-white relative z-10 block">
                       {letter}
                     </span>
-                  
                   </motion.div>
                 ))}
               </div>
+                {/* <HeroText /> */}
             </div>
 
             {/* Description and Waitlist */}
@@ -135,7 +144,8 @@ export default function Home() {
               transition={{ delay: 0.2 }}
             >
               <h2 className="text-xl md:text-2xl font-light tracking-wide max-w-2xl mx-auto px-4">
-                Beautiful, fast and modern React Native components. Built with performance and customization in mind.
+                Beautiful, fast and modern React Native components. Built with
+                performance and customization in mind.
               </h2>
 
               {/* Feature Cards */}
@@ -190,7 +200,9 @@ export default function Home() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
-                  <Button className="bg-white text-black hover:bg-white/90 px-6">Join Waitlist</Button>
+                  <Button className="bg-white text-black hover:bg-white/90 px-6">
+                    Join Waitlist
+                  </Button>
                 </div>
               </div>
 
@@ -234,6 +246,6 @@ export default function Home() {
         </motion.div>
       </main>
     </div>
-  )
+  );
 }
 
